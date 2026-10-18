@@ -1,0 +1,28 @@
+# Local dependencies and build output
+**/.terraform/
+**/bin/
+**/obj/
+**/node_modules/
+**/data/
+.DS_Store
+.idea/
+.vscode/
+
+# Terraform state, saved plans and crash output (keep .terraform.lock.hcl)
+*.tfstate*
+**/terraform.tfstate.d/
+*.tfplan
+crash.log
+crash.*.log
+
+# Local credentials and generated sensitive configuration
+.env
+.env.*
+!.env.example
+secrets/
+*.key
+*.pem
+*.pfx
+*.db
+*.db-shm
+*.db-wal

@@ -1,0 +1,7 @@
+{
+  "proxy_port": 8001,
+  "upstream_timeout_ms": 5000,
+  "requests_per_second": 10,
+  "requests_per_minute": 20,
+  "cache_ttl_seconds": 5
+}

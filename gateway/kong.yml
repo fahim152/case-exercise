@@ -1,0 +1,45 @@
+# Terraform renders placeholders before Kong loads this configuration.
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: product-order-api
+    url: http://mock-backend:8080
+    connect_timeout: ${upstream_timeout_ms}
+    read_timeout: ${upstream_timeout_ms}
+    write_timeout: ${upstream_timeout_ms}
+    retries: 0
+    plugins:
+      - name: key-auth
+        config:
+          key_names: [X-Api-Key]
+          key_in_header: true
+          key_in_query: false
+          key_in_body: false
+          hide_credentials: true
+      - name: rate-limiting
+        config:
+          policy: local
+          limit_by: service
+          second: ${requests_per_second}
+          minute: ${requests_per_minute}
+          fault_tolerant: false
+          hide_client_headers: false
+    routes:
+      - name: get-product
+        methods: [GET]
+        paths: ['~/products/[^/]+$']
+        strip_path: false
+        plugins:
+          - name: proxy-cache
+            config:
+              strategy: memory
+              request_method: [GET]
+              response_code: [200]
+              content_type: [application/json, 'application/json; charset=utf-8']
+              cache_ttl: ${cache_ttl_seconds}
+              cache_control: false
+      - name: create-order
+        methods: [POST]
+        paths: ['~/orders$']
+        strip_path: false
