@@ -121,6 +121,21 @@ HTTP status counts: { '200': 1 }
 
 Second Response, returning from a cached response from the gateway instead reaching out to the backend. After 5 sec the cache will be invalidated and will hit the backend again to get it. 
 
+**Rotate Secret**
+<app_identity> is app-a or app-b
+
+```
+docker exec --user kong product-order-test-gateway sh /opt/lab/bootstrap.sh <app_identity>
+```
+```
+docker restart product-order-test-gateway
+````
+then collect the key again by running
+
+```
+docker exec product-order-test-gateway cat /var/lib/lab-secrets/<app_identity>.key
+```
+
 **Possible Improvement for this solution:**
 
 **Caching:** Exploring explicit cache invalidation when product details change. So client doesnt need to wait for ttl expiry or receive stale data. 
