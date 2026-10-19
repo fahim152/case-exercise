@@ -1,0 +1,28 @@
+meta {
+  name: App B - Create order
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/orders
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  X-Api-Key: {{appBKey}}
+}
+
+body:json {
+  {
+    "productId": "1",
+    "quantity": 2
+  }
+}
+
+docs {
+  Expected: 201 with fixed orderId "1". The stub stores nothing.
+  Change quantity to 0 to demonstrate a 400 validation response.
+}

@@ -1,0 +1,20 @@
+meta {
+  name: App A - Get product
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/products/1
+  body: none
+  auth: none
+}
+
+headers {
+  X-Api-Key: {{appAKey}}
+}
+
+docs {
+  Expected: 200. Send twice to observe X-Cache-Status and X-Backend-Request-Id.
+  Test cache TTL: 5 seconds. Production-demo cache TTL: 30 seconds.
+}

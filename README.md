@@ -40,7 +40,8 @@ A demo test file (demo.mjs), a small js script to test a few capabilities and al
 - Available host ports 8001 and 8002, or adjusted configuration in:
 - `infra/environments/test.json` for test, currently 8001.
 - `infra/environments/production.json` for the production demo, currently 8002.
-- Optionally `tests/demo.mjs` has hardcoded port, change and adjust if necessary 
+- Bruno for api testing
+- Optionally Node 22+ for `tests/demo.mjs`, it has hardcoded port, change and adjust if necessary 
 
 **How to run:**
 
@@ -59,12 +60,15 @@ terraform apply
 If you need to destroy both profiles and their credentials. Run “`terraform destroy`” command 
 
 **Try the API:**
+
 From cli: Without X-Api-Key header:  “`curl -i http://localhost:8001/products/1`”  -> will return 401 unauthorized 
 
 
 Get the key using: “`docker exec product-order-test-gateway cat /var/lib/lab-secrets/app-a.key`” or “`docker exec product-order-test-gateway cat /var/lib/lab-secrets/app-b.key`” 
 
 Use Bruno/postman/insomnia or similar add the X-Api-Key in the header and pass the printed key you will receive the response. 
+
+(Alternatively, You can use the Bruno collection in the repo add the collection to your Bruno library. its preloaded with header and body required)
 
 **Endpoints:**
 - GET `http://localhost:8001/products/1` with X-Api-Key header
@@ -131,14 +135,14 @@ Showcase observability with dashboard, (fx. using prometheus plugin, and grafana
 **Reference material used:** 
 
 **Kong Plugins:**
-- Key Auth (https://developer.konghq.com/plugins/key-auth/) — validates application API keys.
+- Key Auth (https://developer.konghq.com/plugins/key-auth/) - validates application API keys.
 - Rate Limiting (https://developer.konghq.com/plugins/rate-limiting/) - limits request traffic.
-- Proxy Cache (https://developer.konghq.com/plugins/proxy-cache/) — caches eligible product responses.
+- Proxy Cache (https://developer.konghq.com/plugins/proxy-cache/) - caches eligible product responses.
 
 **Configuration:** 
-- Kong DB-less Configuration (https://developer.konghq.com/gateway/db-less-mode/) — loading declarative configuration without a database.
-- Terraform Documentation (https://developer.hashicorp.com/terraform/docs) — Terraform concepts and commands.
-- Terraform Docker Provider (https://registry.terraform.io/providers/kreuzwerker/docker/4.6.0/docs) — the provider version used to manage our Docker resources.
+- Kong DB-less Configuration (https://developer.konghq.com/gateway/db-less-mode/) - loading declarative configuration without a database.
+- Terraform Documentation (https://developer.hashicorp.com/terraform/docs) - Terraform concepts and commands.
+- Terraform Docker Provider (https://registry.terraform.io/providers/kreuzwerker/docker/4.6.0/docs) - the provider version used to manage our Docker resources.
 
 **Code Assist:**
 - GitHub Copilot assistance for ideation, code drafting, and review

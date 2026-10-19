@@ -1,0 +1,28 @@
+meta {
+  name: App A - Create order
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/orders
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  X-Api-Key: {{appAKey}}
+}
+
+body:json {
+  {
+    "productId": "1",
+    "quantity": 2
+  }
+}
+
+docs {
+  Expected: 201 with fixed orderId "1". The stub stores nothing.
+  Repeated requests should have different backend request IDs and no cache hit.
+}

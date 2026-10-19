@@ -1,0 +1,21 @@
+meta {
+  name: App B - Get product
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/products/1
+  body: none
+  auth: none
+}
+
+headers {
+  X-Api-Key: {{appBKey}}
+}
+
+docs {
+  Expected: 200 when shared quota is available.
+  App B has a different key, but shares the API Service rate limit with App A.
+  Cache entries are consumer-specific; do not assume App A warmed App B's entry.
+}

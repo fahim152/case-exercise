@@ -1,0 +1,15 @@
+meta {
+  name: No auth - Get product
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/products/1
+  body: none
+  auth: none
+}
+
+docs {
+  Expected: 401 Unauthorized, even when a product response is already cached.
+}
